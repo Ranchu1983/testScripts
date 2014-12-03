@@ -115,18 +115,19 @@ function audio_name($name)
 function Show_case($testcase,$message='')
 {
 #print message
-	echo $testcase;
-	echo $message;
+	echo '<div font-size:300%;> 
+	 <h3>'.$testcase.'</h3>
+	 <h2>'.$message.'</h2></div>';
 # show text box pass, fail, other chooice
 	echo '
-	<form id="editor" method="post" action="'.$_SERVER['PHP_SELF'].'">
-	<textarea height:40px weight:120px  name="comments">comments: </textarea><br/>		
+	<form id="TestCaseScreen" method="post" action="'.$_SERVER['PHP_SELF'].'">
+	<textarea height:80px rows=5 cols=100   name="comments">comments: </textarea><br/>		
 	<input type="submit" value="Pass" name="result"/>
 	<input type="submit" value="Fail" name="result"/>
 	';
 
 }
-	
+
 
 
 ?>

@@ -4,11 +4,24 @@ include "logging.php";
 include "run_test.php";
 include 'ran_func.php';
 session_start();
+echo "<head>
+<style>
+body {
+	margin-left: auto;
+    margin-right: auto;
+    width: 50em;
+    background-color: #A3A3C2;
+}
 
-if (isset($_SESSION["filename"])==false)
-	{
-	$_SESSION["filename"]=create_log( );
-	echo $_SESSION["filename"];
+</style>";
+
+if (isset($_SESSION['mac'])==True)
+{
+	if (isset($_SESSION["filename"])==false)
+		{
+		$_SESSION["filename"]=create_log( );
+		#echo $_SESSION["filename"];
+	}
 }
 
 #$_SESSION['mac']
@@ -100,7 +113,7 @@ if($_SESSION['Test_Cases']!='')
 	{
 	
 	if ($_SESSION["runTest"]=="complete") 
-		{	$_SESSION['caseStep']=0;
+		{	$_SESSION['caseStep']=1;
 			$_SESSION['caseN']++;
 			
 		}
@@ -113,17 +126,19 @@ if($_SESSION['Test_Cases']!='')
 	$total_n_tesr_case= count($_SESSION['Test_Cases']);
 	if ($total_n_tesr_case <= $_SESSION['caseN']) #show result
 		{
-			echo "display result";
+			#echo " Test Completed display result";
 			if (count($_SESSION['Test_Cases']) == $_SESSION['caseN'])
 				{
-					echo "display result";
-					echo'
-					<form method="post" id="test_flame_form"> 
-					<br/>
-					<br/>
-					<input  type="submit" name="backToTestMenu" value="back to Test Menu" />
-					</form> ';
+					echo "<H1> Test Completed ------- Result</H1><br/>";
+					$result= file_get_contents( $_SESSION["filename"]);
+					echo "<textarea  name=results rows = 30 cols=100 >".$result."</textarea > ";
 					
+					echo'
+						<form method="post" id="test_flame_form"> 
+						<br/>
+						<input  type="submit" name="backToTestMenu" value="back to Test Menu" />
+						</form> ';
+
 				#display_result();
 				}
 		}
@@ -134,7 +149,7 @@ if($_SESSION['Test_Cases']!='')
 		}
 	
 	}
-
+	
 
 
 #close window and close log
@@ -151,7 +166,12 @@ print_r ($_SESSION['Test_Cases']);
  echo "<br/>runTest: $_SESSION[runTest]";
  echo "<br/>filename: $_SESSION[filename]";
 # echo "<br/>$_SESSION[runTest]".$_SESSION['runTest'];
+echo'
+	<form method="post" id="test_flame_form"> 
+	<br/>
 
+	<input  type="submit" name="backToTestMenu" value="back to Test Menu" />
+	</form> ';
 
 
 
